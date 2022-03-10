@@ -1,0 +1,130 @@
+﻿@model Control_Impressora.Models.Impressora
+
+@{
+    ViewData["Title"] = "Cadastro";
+}
+
+<div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Cadastro Impressora</h4>
+                  <form asp-action="Cadastro" class="form-sample">
+                      <p class="card-description">
+                          Preencha os dados abaixo:
+                      </p>
+                      <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Nome</label>
+                                  <div class="col-sm-9">
+                                      <input asp-for="Marca" class="form-control" required />
+                                      <span asp-validation-for="Marca" class="text-danger"></span>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Modelo</label>
+                                  <div class="col-sm-9">
+                                      <input asp-for="Modelo" class="form-control" required/>
+                                      <span asp-validation-for="Modelo" class="text-danger"></span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Versao Drive</label>
+                                  <div class="col-sm-9">
+                                      <input asp-for="VersaoDrive" class="form-control" required />
+                                      <span asp-validation-for="VersaoDrive" class="text-danger"></span>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Mac</label>
+                                  <div class="col-sm-9">
+                                      <input asp-for="Mac" class="form-control" placeholder="00:00:00:00" required />
+                                      <span asp-validation-for="Mac" class="text-danger"></span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-5">
+                              <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">IP Andress</label>
+                                  <div class="col-sm-9">
+                                      <input asp-for="IpImpre" class="form-control" placeholder="127.0.0.1" required />
+                                      <span asp-validation-for="IpImpre" class="text-danger"></span>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Toner Estoque</label>
+                                  <div class="col-sm-9">
+                                      <input asp-for="QtdEstoqueToner" class="form-control" required />
+                                      <span asp-validation-for="QtdEstoqueToner" class="text-danger"></span>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-3">
+                              <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Toner Uso</label>
+                                  <div class="col-sm-9">
+                                      <input asp-for="QtdEstoqueUsoToner" class="form-control" required />
+                                      <span asp-validation-for="QtdEstoqueUsoToner" class="text-danger"></span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <p class="card-description">
+                          Selecione
+                      </p>
+                      <br />
+                      <div class="row">
+                          <div class="col-md-4">
+                              <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Empresa</label>
+                                  <div class="col-sm-9">
+                                      <select required asp-for="EmpresaId" class="form-control" asp-items="@(new SelectList(ViewBag.Empresa, "Id","Nome"))"></select>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Endereço</label>
+                                  <div class="col-sm-9">
+                                      <select required asp-for="EnderecoId" class="form-control" asp-items="@(new SelectList(ViewBag.Endereco, "Id","Base"))"></select>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Tecnico</label>
+                                  <div class="col-sm-9">
+                                      <select  required asp-for="UsuarioId" class="form-control" asp-items="@(new SelectList(ViewBag.Usuario, "Id", "Nome"))"></select>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                     
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="form-group row">
+
+       
+                                      <button type="submit" value="Cadastrar" class="btn btn-behance">Cadastrar</button>
+
+                              </div>
+                          </div>
+                      </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+

@@ -1,0 +1,91 @@
+﻿@model Control_Impressora.Models.FileImpressora
+@{
+    ViewData["Title"] = "Dados Impressora";
+}
+
+
+@if (TempData["Message1"] != null)
+{
+    <div class="alert alert-danger alert-dismissible" style="margin-top:20px">
+        @TempData["Message1"]
+    </div>}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success alert-dismissible" style="margin-top:20px">
+        @TempData["Message"]
+    </div>}
+
+<hr />
+
+
+<form method="post">
+
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Envio de Documentos </h3>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1">NumberOne</label>
+                <input type="number" autocomplete="off" class="form-control" asp-for="impressoraDate.NumberOne" placeholder="Numero 1" required>
+
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1"></label>
+                <input type="number" autocomplete="off" class="form-control" asp-for="impressoraDate.NumberTwo" placeholder="Numero 2" required>
+                <input asp-for="@Model.Impressora.Id" class="form-control" value="@Model.Impressora.Id" readonly="readonly" hidden="hidden" />
+
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary" asp-controller="DadosImpre" asp-action="InsertDatesImpre">Enviar Documento</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<table id="table_id" class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Arquivo</th>
+            <th>Descricao</th>
+            <th>Criador</th>
+            <th>Tipo Arquivo</th>
+            <th>Data</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ImpressoraDate)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOne)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberTwo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QtdPapel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QtdPapelUtil)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Volume)
+                </td>
+                <td>
+                    <a type="button" class="btn btn-primary" asp-controller="Impressora" asp-action="Download" asp-route-id="@item.Id">Download</a>
+                    <a type="button" target="_blank" class="btn btn-info" asp-controller="Impressora" asp-action="DetailsFileFromDatabase" asp-route-id="@item.Id">Detalhes</a>
+                    <a type="button" target="_blank" class="btn btn-info" asp-controller="File" asp-action="GetFile" asp-route-id="@item.Id">Visualizar</a>
+                </td>
+
+            </tr>
+}
+    </tbody>
+</table>

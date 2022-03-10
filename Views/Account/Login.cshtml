@@ -1,0 +1,31 @@
+﻿@model Control_Impressora.ViewModels.LoginViewModel
+
+@{
+    Layout = "_LayoutLogin";
+}
+
+<form method="post" class="pt-3">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <input asp-for="Email" type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="E-mail">
+        <span class="fas fa-envelope" asp-validation-for="Email"></span>
+    </div>
+    <div class="form-group">
+        <input asp-for="Password" type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+        <span class="fas fa-lock" asp-validation-for="Password"></span>
+    </div>
+    <div class="my-2 d-flex justify-content-between align-items-center">
+        <div class="form-check">
+            <input type="checkbox" id="remember" asp-for="RememberMe" class="form-check-input" />
+            @Html.DisplayNameFor(m => m.RememberMe)
+            <label asp-for="RememberMe">
+                Lembrar
+
+            </label>
+        </div>
+    </div>
+    <div class="col-4">
+        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+    </div>
+</form>
+

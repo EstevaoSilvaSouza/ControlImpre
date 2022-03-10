@@ -1,0 +1,99 @@
+﻿@model Control_Impressora.Models.FileImpressora
+
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+@if (TempData["Message1"] != null)
+{
+<div class="alert alert-danger alert-dismissible" style="margin-top:20px">
+    @TempData["Message1"]
+</div>}
+
+@if (TempData["Message"] != null)
+{
+<div class="alert alert-success alert-dismissible" style="margin-top:20px">
+    @TempData["Message"]
+</div>}
+
+<hr />
+
+
+<form method="post" enctype="multipart/form-data">
+
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Envio de Documentos </h3>
+        </div>
+        <form>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Integrantes do trabalho</label>
+                    <input type="text" autocomplete="off" class="form-control" id="des" name="descricao" placeholder="Descrição do documento" required>
+                    <input asp-for="@Model.Impressora.Id" class="form-control" value="@Model.Impressora.Id" readonly="readonly" hidden="hidden" />
+                    
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Selecione o Arquivo</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" name="files" multiple class="custom-file-input" required />
+                            <label class="custom-file-label" for="exampleInputFile">Escolher arquivo</label>
+                        </div>
+                        <div class="input-group-append">
+                            <span class="input-group-text">Upload</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary" asp-controller="Impressora" asp-action="Arquivos">Enviar Documento</button>
+                </div>
+        </form>
+    </div>
+</form>
+
+<table id="table_id" class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Arquivo</th>
+            <th>Descricao</th>
+            <th>Criador</th>
+            <th>Tipo Arquivo</th>
+            <th>Data</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.FileOnDatabaseModel)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelitem => item.Id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nome)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Descricao)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nome)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TipoArquivo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CriadoEm)
+    </td>
+    <td>
+        <a type="button" class="btn btn-primary" asp-controller="Impressora" asp-action="Download" asp-route-id="@item.Id">Download</a>
+        <a type="button" target="_blank" class="btn btn-info" asp-controller="Impressora" asp-action="DetailsFileFromDatabase" asp-route-id="@item.Id">Detalhes</a>
+        <a type="button" target="_blank" class="btn btn-info" asp-controller="File" asp-action="GetFile" asp-route-id="@item.Id">Visualizar</a>
+    </td>
+
+</tr>}
+    </tbody>
+</table>
